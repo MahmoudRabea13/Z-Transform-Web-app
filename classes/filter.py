@@ -19,6 +19,10 @@ class Filter():
         magnitude = 20*np.log(np.abs(response))
         phase = np.unwrap(np.angle(response))
         return (frequency, magnitude, phase)
+    def all_pass(self, a:complex)-> None:
+        self.poles.append(a)
+        zero=(1/np.abs(a))*np.exp(1j*np.angle(a))
+        self.zeros.append(zero)
     def plot_response(self, frequency, magnitude,phase):
         plt.figure()
         plt.ylabel('dB')
@@ -34,10 +38,3 @@ class Filter():
         plt.plot(frequency, phase)
         plt.xlim(-0.01,np.pi+0.01)
         plt.savefig('./static/phase.png')
-    # def plot_response_phase(self, frequency, phase):
-    #     plt.plot(frequency, phase)
-    #     plt.ylabel('Magnitude [dB]')
-    #     plt.xlabel('Frequency [rad/sample]')
-    #     plt.title('Phase Response')
-    #     plt.xlim(-0.01,np.pi+0.01)
-    #     plt.savefig('./static/phase.png')
