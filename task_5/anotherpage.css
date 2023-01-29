@@ -1,0 +1,70 @@
+.correction{
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    height: 755px;
+}
+.one{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: rgb(39 43 48);
+    border-radius: 8px;
+    padding: 20px;
+    min-width: 47%;
+}
+.two{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(1, 8, 15);
+    border-radius: 8px;
+    padding: 20px;
+    min-width: 48%;
+}
+.oneside{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(236, 18, 18);
+    border-radius: 8px;
+    padding: 20px;
+    min-width: 10%;
+}
+.twoside{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(255, 187, 0);
+    border-radius: 8px;
+    padding: 20px;
+    min-width: 10%;
+}
+.thirdside{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: green;
+    border-radius: 8px;
+    padding: 20px;
+    min-width: 10%; 
+}
+.fourside{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: black;
+    border-radius: 8px;
+    padding: 20px;
+    min-width: 10%; 
+
+}
+.fiveside{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: blue;
+    border-radius: 8px;
+    padding: 20px;
+    min-width: 48%; 
+}
