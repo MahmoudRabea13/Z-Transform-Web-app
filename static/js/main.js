@@ -21,7 +21,29 @@ realInputBtn.addEventListener("change", function(){
 document.getElementById("btn_3").onclick = function () {
     location.href = "/catalog";
 };
-
+document.getElementById("btn_1").onclick = function () {
+    var xhr = new XMLHttpRequest();
+var JSON_sent = {signal};
+xhr.open('POST', '/filter', true);
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.onload = function (e) {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log(JSON_sent['signal'])
+        console.log(JSON.parse(xhr.response))
+        Plotly.newPlot('mag-plot', [{
+            x: x_s,
+            // هنا اللقطة انك تباصي الy الجديد بعد الفترة 
+            // انا هنا ضربت ف الجافاسكريبت
+            y: JSON.parse(xhr.response).map(function(x) { return x; }),
+           type: 'scatter'
+        }]);
+        
+    } else {
+        console.log(xhr.responseText);
+    }
+    };
+    xhr.send(JSON.stringify(JSON_sent));
+};
 const gen = document.getElementById('pad');
 gen.addEventListener("mousemove", (event) => {
     event.preventDefault();
@@ -38,7 +60,7 @@ gen.addEventListener("mousemove", (event) => {
                 x: x_s,
                 // هنا اللقطة انك تباصي الy الجديد بعد الفترة 
                 // انا هنا ضربت ف الجافاسكريبت
-                y: JSON.parse(xhr.response).map(function(x) { return x * 10; }),
+                y: JSON.parse(xhr.response).map(function(x) { return x; }),
                type: 'scatter'
             }]);
             
