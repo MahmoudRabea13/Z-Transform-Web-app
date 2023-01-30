@@ -14,7 +14,6 @@ def image():
         value = request.json['signal']
         value = np.array(value)
         value = process.apply_filter(value) 
-        # print(value.shape)
         return json.dumps(value.tolist())
     else:
         return render_template('index.html')
@@ -42,22 +41,22 @@ def allpass():
     if request.method == 'POST': 
         value = request.json
         print(value)
-        process.all_pass(-0.2)
+        process.all_pass(value)
         frequency, magnitude,phase = process.get_response()
         response = {'frequency':frequency.tolist(),'magnitude':magnitude.tolist(),'phase':phase.tolist()}
         return json.dumps(response)
     else:
-        return render_template('index.html')
+        return render_template('catalog.html')
 @app.route("/applyallpass" ,methods=['GET','POST'])
 def applyallpass():
     if request.method == 'POST': 
         value = request.json
         print(value)
-        process.add_all_pass(-0.2)
+        process.add_all_pass(value)
         frequency, magnitude,phase = process.get_response()
         response = {'frequency':frequency.tolist(),'magnitude':magnitude.tolist(),'phase':phase.tolist()}
         return json.dumps(response)
     else:
-        return render_template('index.html')
+        return render_template('catalog.html')
 if __name__ == '__main__':
     app.run(debug=True)
