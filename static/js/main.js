@@ -18,9 +18,9 @@ realInputBtn.addEventListener("change", function(){
     }
 })
 
-document.getElementById("btn_3").onclick = function () {
+document.getElementById('btn_3').addEventListener("click", function(){
     location.href = "/catalog";
-};
+})
 
 document.getElementById('btn_1').addEventListener('click', function(){
     var xhr = new XMLHttpRequest();
@@ -71,6 +71,8 @@ gen.addEventListener("mousemove", (event) => {
             console.log(JSON.parse(xhr.response))
             Plotly.newPlot('output-plot', [{
                 x: x_s,
+                // هنا اللقطة انك تباصي الy الجديد بعد الفترة 
+                // انا هنا ضربت ف الجافاسكريبت
                 y: JSON.parse(xhr.response).map(function(x) { return x; }),
                type: 'scatter'
             }]);
