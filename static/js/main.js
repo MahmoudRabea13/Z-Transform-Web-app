@@ -26,6 +26,19 @@ const gen = document.getElementById('pad');
 gen.addEventListener("mousemove", (event) => {
     event.preventDefault();
     update_graph(event.clientX);
+    var xhr = new XMLHttpRequest();
+    var JSON_sent = {signal};
+    xhr.open('POST', '/', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function (e) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            /// sent succesfully
+        } else {
+            console.log(xhr.responseText);
+        }
+    };
+    xhr.send(JSON.stringify(JSON_sent));
+    console.log(signal);
   });
 function update_graph(x) {
     signal.push(x);
