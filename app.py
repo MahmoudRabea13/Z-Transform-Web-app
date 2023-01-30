@@ -12,7 +12,6 @@ filter = Filter()
 def image():
     if request.method == 'POST':
         value = request.json['signal']
-        process.set_filter([-0.99], [], 1)
         value = np.array(value)
         value = process.apply_filter(value) 
         # print(value.shape)
@@ -32,6 +31,29 @@ def filter():
     if request.method == 'POST': 
         value = request.json
         print(value)
+        process.set_filter([-0.2,-0.5,0.98], [-0.99,0.5,0.2+0.6j], 1)
+        frequency, magnitude,phase = process.get_response()
+        response = {'frequency':frequency.tolist(),'magnitude':magnitude.tolist(),'phase':phase.tolist()}
+        return json.dumps(response)
+    else:
+        return render_template('index.html')
+@app.route("/allpass" ,methods=['GET','POST'])
+def allpass():
+    if request.method == 'POST': 
+        value = request.json
+        print(value)
+        process.all_pass(-0.2)
+        frequency, magnitude,phase = process.get_response()
+        response = {'frequency':frequency.tolist(),'magnitude':magnitude.tolist(),'phase':phase.tolist()}
+        return json.dumps(response)
+    else:
+        return render_template('index.html')
+@app.route("/applyallpass" ,methods=['GET','POST'])
+def applyallpass():
+    if request.method == 'POST': 
+        value = request.json
+        print(value)
+        process.add_all_pass(-0.2)
         frequency, magnitude,phase = process.get_response()
         response = {'frequency':frequency.tolist(),'magnitude':magnitude.tolist(),'phase':phase.tolist()}
         return json.dumps(response)
