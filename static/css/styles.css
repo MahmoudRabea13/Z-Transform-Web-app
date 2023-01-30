@@ -147,3 +147,11 @@
 a{
     text-decoration: none;
 }
+
+#pad{
+    display: flex;
+    background-color: rgb(39 43 48);
+    border-radius: 8px;   
+    width: 300px;
+    height: 200px;
+}
