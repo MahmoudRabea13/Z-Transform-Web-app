@@ -1,3 +1,4 @@
+from urllib import response
 from flask import Flask, jsonify , request, render_template 
 import os
 import json
@@ -29,8 +30,11 @@ def catalog():
 @app.route("/filter" ,methods=['GET','POST'])
 def filter():
     if request.method == 'POST': 
+        value = request.json
+        print(value)
         frequency, magnitude,phase = process.get_response()
-        return jsonify({'frequency':frequency.tolist(),'magnitude':magnitude.tolist(),'phase':phase.tolist()})
+        response = {'frequency':frequency.tolist(),'magnitude':magnitude.tolist(),'phase':phase.tolist()}
+        return json.dumps(response)
     else:
         return render_template('index.html')
 if __name__ == '__main__':
