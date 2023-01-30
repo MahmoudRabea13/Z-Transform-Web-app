@@ -1,6 +1,10 @@
 const realInputBtn = document.getElementById ("real-input");
 const customeBtn = document.getElementById ("custome_button");
 const customText = document.getElementById ("custom-text");
+pad =document.getElementById('pad')
+signal = []
+x_s = [0]
+x_val = 0
 custome_button.addEventListener("click", function(){
     realInputBtn.click();
 })
@@ -15,6 +19,26 @@ realInputBtn.addEventListener("change", function(){
 })
 
 document.getElementById("btn_3").onclick = function () {
-    //e.preventDefault();
     location.href = "/catalog";
 };
+
+const gen = document.getElementById('pad');
+gen.addEventListener("mousemove", (event) => {
+    event.preventDefault();
+    update_graph(event.clientX);
+  });
+function update_graph(x) {
+    signal.push(x);
+    x_val ++;
+    x_s.push(x_val);
+    if (x_s.length > 100) {
+        x_s.shift();
+        signal.shift();
+    }
+    Plotly.newPlot('live-plot', [{
+        x: x_s,
+        y: signal,
+        type: 'scatter'
+    }]);
+}
+
