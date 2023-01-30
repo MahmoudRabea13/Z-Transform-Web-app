@@ -3,20 +3,17 @@ import os
 import json
 import numpy as np
 from classes.filter import Filter
-from classes.signal_1 import Signal_1
-value = []
-filter1 = Filter()
+from classes.process import Process
 app = Flask( __name__ )
+process = Process()
+filter = Filter()
 @app.route("/" ,methods=['POST','GET'])
 def image():
     if request.method == 'POST':
         value = request.json['signal']
-        filter1.set_zeros([1])
-        filter1.set_poles([0])
-        filter1.set_gain(1)
-        new = Signal_1(filter)
+        process.set_filter([-0.99], [], 1)
         value = np.array(value)
-        value = new.apply_filter(value) 
+        value = process.apply_filter(value) 
         # print(value.shape)
         return json.dumps(value.tolist())
     else:
@@ -31,13 +28,9 @@ def catalog():
     return render_template('catalog.html')
 @app.route("/filter" ,methods=['GET','POST'])
 def filter():
-    if request.method == 'POST':
-        value = request.json['signal']
-        filter1.set_zeros([1])
-        filter1.set_poles([0])
-        filter1.set_gain(1)
-        frequency, magnitude, phase = filter1.get_response()   
-        return json.dump(magnitude.tolist())
+    if request.method == 'POST': 
+        frequency, magnitude,phase = process.get_response()
+        return jsonify({'frequency':frequency.tolist(),'magnitude':magnitude.tolist(),'phase':phase.tolist()})
     else:
         return render_template('index.html')
 if __name__ == '__main__':
