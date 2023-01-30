@@ -17,7 +17,7 @@ class Process():
         return new_signal.real
     def add_all_pass(self, a:complex)-> None:
         self.filter.all_pass(a)
-    def all_pass(self, a:complex)-> None:
+    def all_pass(self, a):
         filter_all = Filter()
         filter_all.all_pass(a)
         freq , mag, phase = filter_all.get_response()

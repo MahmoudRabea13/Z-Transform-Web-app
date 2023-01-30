@@ -19,7 +19,7 @@ class Filter():
         magnitude = 20*np.log(np.abs(response))
         phase = np.unwrap(np.angle(response))
         return (frequency, magnitude, phase)
-    def all_pass(self, a:complex)-> None:
+    def all_pass(self, a):
         self.poles.append(a)
-        zero=(1/np.abs(a))*np.exp(1j*np.angle(a))
+        zero=(1/a)
         self.zeros.append(zero)

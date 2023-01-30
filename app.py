@@ -40,8 +40,9 @@ def filter():
 def allpass():
     if request.method == 'POST': 
         value = request.json
+        print("allpass")
         print(value)
-        process.all_pass(value)
+        process.all_pass(float(value))
         frequency, magnitude,phase = process.get_response()
         response = {'frequency':frequency.tolist(),'magnitude':magnitude.tolist(),'phase':phase.tolist()}
         return json.dumps(response)
@@ -51,8 +52,9 @@ def allpass():
 def applyallpass():
     if request.method == 'POST': 
         value = request.json
+        print("applyallpass")
         print(value)
-        process.add_all_pass(value)
+        process.add_all_pass(float(value))
         frequency, magnitude,phase = process.get_response()
         response = {'frequency':frequency.tolist(),'magnitude':magnitude.tolist(),'phase':phase.tolist()}
         return json.dumps(response)
