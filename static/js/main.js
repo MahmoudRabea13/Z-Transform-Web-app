@@ -32,13 +32,21 @@ gen.addEventListener("mousemove", (event) => {
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload = function (e) {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            /// sent succesfully
+            console.log(JSON_sent['signal'])
+            console.log(JSON.parse(xhr.response))
+            Plotly.newPlot('output-plot', [{
+                x: x_s,
+                // هنا اللقطة انك تباصي الy الجديد بعد الفترة 
+                // انا هنا ضربت ف الجافاسكريبت
+                y: JSON.parse(xhr.response).map(function(x) { return x * 10; }),
+               type: 'scatter'
+            }]);
+            
         } else {
             console.log(xhr.responseText);
         }
     };
     xhr.send(JSON.stringify(JSON_sent));
-    console.log(signal);
   });
 function update_graph(x) {
     signal.push(x);
@@ -53,5 +61,5 @@ function update_graph(x) {
         y: signal,
         type: 'scatter'
     }]);
-}
 
+}
