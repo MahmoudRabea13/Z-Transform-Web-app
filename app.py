@@ -7,7 +7,8 @@ app = Flask( __name__ )
 @app.route("/" ,methods=['POST','GET'])
 def image():
     if request.method == 'POST':
-        
+        value = request.json['signal']
+        print(value)
         return render_template('index.html')
 
 
