@@ -1,4 +1,3 @@
-document.getElementById("btn_4").onclick = function () {
-    //e.preventDefault();
+document.getElementById('btn_4').addEventListener("click", function(){
     location.href = "/";
-};
+})
