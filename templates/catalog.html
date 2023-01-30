@@ -49,11 +49,15 @@
                     </div>
                 </div>
                 <div class="two">
-                    <img src=" " alt=" " id="selected-all pass">
-                    <ol style="background-color: bisque;">
-                        <li> hahah</li>
-                        <li>hehe</li>
-                        <li>hoho</li>
+                    <div id="submitpassplot" style="width: 300px; height: 300px;"></div>
+                    <div id="applypassplot" style="width: 300px; height: 300px;"></div>
+                    <form action="/allpass" method="POST">
+                        <label for="all-pass" style="color: aliceblue;">All pass Value:</label><br>
+                        <input type="text" id="all-pass" name="all-pass" style="background-color: aliceblue;">
+                        <input  id="submit-all-pass"  type="submit" value="add">
+                        <input  id="apply-all-pass"  type="submit" value="apply">
+                    </form>
+                    <ol id="list" style="background-color: rgb(243, 243, 243);">
                     </ol>
                     
                 </div>
