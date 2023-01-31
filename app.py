@@ -5,6 +5,7 @@ import json
 import numpy as np
 from classes.filter import Filter
 from classes.process import Process
+import pandas as pd
 app = Flask( __name__ )
 process = Process()
 filter = Filter()
@@ -58,5 +59,18 @@ def applyallpass():
         return json.dumps(response)
     else:
         return render_template('catalog.html')
+
+@app.route("/importsignal" ,methods=['GET','POST'])
+def importsignal():
+    if request.method == 'POST': 
+        value = request.files.get('imported-signal')
+        print(value.filename)
+        importedsig = pd.read_csv('./static/imported-signals/'+value.filename)
+        print(importedsig['x'])
+
+        return json.dumps('hehehe')
+    else:
+        return render_template('catalog.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
