@@ -8,6 +8,8 @@ from classes.process import Process
 app = Flask( __name__ )
 process = Process()
 filter = Filter()
+# process.set_filter([-0.2,-0.5,0.98], [-0.99,0.5,0.2+0.6j], 1)
+process.set_filter([1.3], [], 1)
 @app.route("/" ,methods=['POST','GET'])
 def image():
     if request.method == 'POST':
@@ -30,7 +32,6 @@ def filter():
     if request.method == 'POST': 
         value = request.json
         print(value)
-        process.set_filter([-0.2,-0.5,0.98], [-0.99,0.5,0.2+0.6j], 1)
         frequency, magnitude,phase = process.get_response()
         response = {'frequency':frequency.tolist(),'magnitude':magnitude.tolist(),'phase':phase.tolist()}
         return json.dumps(response)
@@ -40,10 +41,8 @@ def filter():
 def allpass():
     if request.method == 'POST': 
         value = request.json
-        print("allpass")
         print(value)
-        process.all_pass(float(value))
-        frequency, magnitude,phase = process.get_response()
+        frequency, magnitude,phase = process.all_pass(float(value))
         response = {'frequency':frequency.tolist(),'phase':phase.tolist()}
         return json.dumps(response)
     else:
@@ -52,7 +51,6 @@ def allpass():
 def applyallpass():
     if request.method == 'POST': 
         value = request.json
-        print("applyallpass")
         print(value)
         process.add_all_pass(float(value))
         frequency, magnitude,phase = process.get_response()
