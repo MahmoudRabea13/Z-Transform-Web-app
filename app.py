@@ -36,7 +36,6 @@ def filter():
         # print(zeros[0].get('y'))
         zeros_out = convert_to_complex(zeros)
         poles_out = convert_to_complex(poles)
-        print(zeros_out)
         process.set_filter(zeros_out, poles_out, 1)
         frequency, magnitude,phase = process.get_response()
         response = {'frequency':frequency.tolist(),'magnitude':magnitude.tolist(),'phase':phase.tolist()}
@@ -70,9 +69,8 @@ def importsignal():
     if request.method == 'POST': 
         value = request.files.get('imported-signal')
         # print(value.filename)
-        print(process.get_zeros)
         importedsig = pd.read_csv('./static/imported-signals/'+value.filename)
-        print(importedsig['x'])
+        # print(importedsig['x'])
         new_signal = process.apply_filter(importedsig['y'])
         response = {'x':importedsig['x'].tolist(),'y':importedsig['y'].tolist(),'y_new':new_signal.tolist()}
         return json.dumps(response)
@@ -82,7 +80,7 @@ def importsignal():
 def export_filter():
     if request.method == 'POST':
         zeros,poles = process.get_zeros_poles()
-         
+
 
 
 
