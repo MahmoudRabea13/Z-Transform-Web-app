@@ -45,3 +45,9 @@ document.getElementById('apply-all-pass').addEventListener('click', function(e){
         }};  
     xhr.send(JSON.stringify(JSON_sent));
 });
+
+document.getElementById('list').addEventListener('click',function(e){
+    this.removeChild(e.target);
+    console.log('deleted')
+})
+
