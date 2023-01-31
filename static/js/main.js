@@ -207,6 +207,9 @@ function mouseupHandler()
         createPole();
     }
     draw();
+    ///////////////////////////  هنااااااااا    ///////////////////////////////
+    let zeros = [] ;
+    let poles = [] ;
 }
 
 function konvaInit(container)
