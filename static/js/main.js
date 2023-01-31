@@ -163,7 +163,7 @@ function mousedownHandler()
     if (flag === 1)
     {
         poles.map((element, index) => {
-            if ( (Math.abs(element.x - xOld) < 6) && (Math.abs(element.y - yOld) < 6 ) )
+            if ( (Math.abs(((element.x * 140)+150) - xOld) < 6) && (Math.abs( (150 - (element.y * 140) ) - yOld)  < 6 ) )
             {
                 pole_index = index;
             }
@@ -173,7 +173,7 @@ function mousedownHandler()
     else
     {
         zeros.map((element, index) => {
-            if ( (Math.abs(element.x - xOld) < 4) && (Math.abs(element.y - yOld) < 4 ) )
+            if ( (Math.abs(((element.x * 140)+150) - xOld) < 4) && (Math.abs((150 - (element.y * 140) ) - yOld) < 4 ) )
             {
                 zero_index = index;
             }
