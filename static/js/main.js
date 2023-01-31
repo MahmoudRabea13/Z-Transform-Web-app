@@ -5,7 +5,8 @@ let poles = [] ;
 let flag = 0 ;
 let pole_index = -1 ;
 let zero_index = -1 ;
-
+var htmlContents = document.documentElement.innerHTML;
+localStorage.setItem('content', JSON.stringify(htmlContents ));
 const realInputBtn = document.getElementById ("real-input");
 const customeBtn = document.getElementById ("custome_button");
 const customText = document.getElementById ("custom-text");
@@ -29,7 +30,9 @@ realInputBtn.addEventListener("change", function(){
 })
 
 document.getElementById('btn_3').addEventListener("click", function(){
-    location.href = "/catalog";
+    document.getElementById('cat').style.display = 'block';
+    document.getElementById('first-page').style.display = 'none';
+    console.log('suceesss')
 })
 
         
@@ -99,6 +102,7 @@ document.getElementById ("import-signal").addEventListener("change", function(){
         xhr.onload = function (e) {
             if (xhr.readyState === 4 && xhr.status === 200) {
                      Plotly.newPlot('live-plot', [{
+
                         x: JSON.parse(xhr.response)['x'],
                         y: JSON.parse(xhr.response)['y'],
                         type: 'scatter'
@@ -119,18 +123,7 @@ document.getElementById ("import-signal").addEventListener("change", function(){
     }
 })
 
-/* function honksh(){
-    down=document.getElementById('pad');
-    container = document.getElementById('container');
-    divAbove = document.createElement("div");
-    divAbove.id = "up";
-    divAbove.style.backgroundColor  = "white";
-    divAbove.style.width = "83%"
-    divAbove.style.height = "300px"
-    divAbove.innerHTML = "hehe"
 
-    container.insertBefore(divAbove, down);
-} */
 //////////////////////////////////////////////////////////////////////
 
 // Create the stage and a layer to draw on.
@@ -163,7 +156,7 @@ function mousedownHandler()
     if (flag === 1)
     {
         poles.map((element, index) => {
-            if ( (Math.abs(((element.x * 140)+150) - xOld) < 6) && (Math.abs( (150 - (element.y * 140) ) - yOld)  < 6 ) )
+            if ( (Math.abs(element.x - xOld) < 6) && (Math.abs(element.y - yOld) < 6 ) )
             {
                 pole_index = index;
             }
@@ -173,7 +166,7 @@ function mousedownHandler()
     else
     {
         zeros.map((element, index) => {
-            if ( (Math.abs(((element.x * 140)+150) - xOld) < 4) && (Math.abs((150 - (element.y * 140) ) - yOld) < 4 ) )
+            if ( (Math.abs(element.x - xOld) < 4) && (Math.abs(element.y - yOld) < 4 ) )
             {
                 zero_index = index;
             }
@@ -202,7 +195,7 @@ function mouseupHandler()
             console.log('success')
             console.log(JSON_sent['zeros'])
             //console.log(JSON.parse(xhr.response))
-              Plotly.newPlot('mag-plot', [{
+            Plotly.newPlot('mag-plot', [{
                 x: JSON.parse(xhr.response)['frequency'],
                 y: JSON.parse(xhr.response)['magnitude'],
                 type: 'scatter',
@@ -373,3 +366,4 @@ container.addEventListener('keydown', function (e) {
     }
     e.preventDefault();
 });
+
