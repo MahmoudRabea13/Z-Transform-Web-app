@@ -76,8 +76,62 @@ function update_graph(x) {
     }]);
 
 }
+function import_graph(x_point,y_point,y_new_point){
+    // x_point = parseFloat(x_point)
+    // y_point = parseFloat(y_point)
+    // y_new_point = parseFloat(y_new_point)
+        // Plotly.newPlot('live-plot', [{
+        //                 x: x_point,
+        //                 y: y_point,
+        //                 type: 'scatter'
+        //             }]);
+        // Plotly.newPlot('output-plot', [{
+        //                 x: x_point,
+        //                 y: y_new_point,
+        //                 type: 'scatter'
+        //             }]); 
+var arrayLength = 100
+var YArray = []
+var Y_newArray =[]
+for(var i = 0; i < arrayLength; i++) {
+  var y = y_point[i]
+  var y_new = y_new_point[i]
+  YArray[i] = y
+  Y_newArray = y_new
+}
 
+Plotly.newPlot('live-plot', [{
+  y: YArray,
+  mode: 'scatter',
+  line: {color: '#80CAF6'}
+}]);
+Plotly.newPlot('output-plot', [{
+    y: Y_newArray,
+    mode: 'scatter',
+    line: {color: '#80CAF6'}
+  }]);
 
+var cnt = 0;
+
+var interval = setInterval(function() {
+
+  var y = y_point[30+cnt]
+  YArray = YArray.concat(y)
+  YArray.splice(0, 1)
+  var y_new = y_new_point[30+cnt]
+  Y_newArray = YArray.concat(y_new)
+  Y_newArray.splice(0, 1)
+  var data_update = {
+    y: [YArray]
+  };
+  var new_data_update = {
+    y: [Y_newArray]
+  };
+  Plotly.update('live-plot', data_update)
+  Plotly.update('output-plot', new_data_update)
+  if(++cnt === 500) clearInterval(interval);
+}, 500); 
+    }
 document.getElementById('generate-sig').addEventListener('click',function(){
     /* document.getElementById('generate-sig').disabled = true; */
     document.getElementById('import-sig').disabled = false;
@@ -101,21 +155,23 @@ document.getElementById ("import-signal").addEventListener("change", function(){
         xhr.open('POST', '/importsignal', true);
         xhr.onload = function (e) {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                     Plotly.newPlot('live-plot', [{
+                    import_graph(JSON.parse(xhr.response)['x'],JSON.parse(xhr.response)['y'],JSON.parse(xhr.response)['y_new'])
+                    // Plotly.newPlot('live-plot', [{
 
-                        x: JSON.parse(xhr.response)['x'],
-                        y: JSON.parse(xhr.response)['y'],
-                        type: 'scatter'
-                    }]);
-                    Plotly.newPlot('output-plot', [{
-                        x: JSON.parse(xhr.response)['x'],
-                        y: JSON.parse(xhr.response)['y_new'],
-                        type: 'scatter'
-                    }]); 
+                    //     x: JSON.parse(xhr.response)['x'],
+                    //     y: JSON.parse(xhr.response)['y'],
+                    //     type: 'scatter'
+                    // }]);
+                    // Plotly.newPlot('output-plot', [{
+                    //     x: JSON.parse(xhr.response)['x'],
+                    //     y: JSON.parse(xhr.response)['y_new'],
+                    //     type: 'scatter'
+                    // }]); 
             } else {
                 console.log(xhr.response);
             }
         };
+        // import_graph(x,y,y_new)
         xhr.send(formData);
     }
     else{

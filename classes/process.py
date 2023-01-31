@@ -22,3 +22,5 @@ class Process():
         filter_all.all_pass(a)
         freq , mag, phase = filter_all.get_response()
         return (freq, mag, phase)
+    def get_zeros_poles(self):
+        return self.filter.zeros,self.filter.poles

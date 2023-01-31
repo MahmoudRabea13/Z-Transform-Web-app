@@ -69,7 +69,8 @@ def applyallpass():
 def importsignal():
     if request.method == 'POST': 
         value = request.files.get('imported-signal')
-        print(value.filename)
+        # print(value.filename)
+        print(process.get_zeros)
         importedsig = pd.read_csv('./static/imported-signals/'+value.filename)
         print(importedsig['x'])
         new_signal = process.apply_filter(importedsig['y'])
@@ -77,8 +78,11 @@ def importsignal():
         return json.dumps(response)
     else:
         return render_template('index.html')
-
-
+@app.route("/download", methods=['GET','POST'])
+def export_filter():
+    if request.method == 'POST':
+        zeros,poles = process.get_zeros_poles()
+         
 
 
 
