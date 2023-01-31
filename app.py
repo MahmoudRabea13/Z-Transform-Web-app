@@ -67,10 +67,11 @@ def importsignal():
         print(value.filename)
         importedsig = pd.read_csv('./static/imported-signals/'+value.filename)
         print(importedsig['x'])
-
-        return json.dumps('hehehe')
+        new_signal = process.apply_filter(importedsig['y'])
+        response = {'x':importedsig['x'].tolist(),'y':importedsig['y'].tolist(),'y_new':new_signal.tolist()}
+        return json.dumps(response)
     else:
-        return render_template('catalog.html')
+        return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
