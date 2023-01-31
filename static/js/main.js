@@ -156,7 +156,7 @@ function mousedownHandler()
     if (flag === 1)
     {
         poles.map((element, index) => {
-            if ( (Math.abs(element.x - xOld) < 6) && (Math.abs(element.y - yOld) < 6 ) )
+            if ( (Math.abs(((element.x * 140)+150) - xOld) < 6) && (Math.abs( (150 - (element.y * 140) ) - yOld)  < 6 ) )
             {
                 pole_index = index;
             }
@@ -166,7 +166,7 @@ function mousedownHandler()
     else
     {
         zeros.map((element, index) => {
-            if ( (Math.abs(element.x - xOld) < 4) && (Math.abs(element.y - yOld) < 4 ) )
+            if ( (Math.abs(((element.x * 140)+150) - xOld) < 4) && (Math.abs((150 - (element.y * 140) ) - yOld) < 4 ) )
             {
                 zero_index = index;
             }
@@ -324,6 +324,28 @@ function zeroFlag()
 function poleFlag()
 {
     flag = 1;
+}
+
+function filterDownload()
+{
+//     const client = {
+//         "Name": "Mini Corp.",
+//  "Order_count": 83,
+//  "Address": "Little Havana"
+// }
+    const filter = poles.concat(zeros);
+    const data = JSON.stringify(filter);
+    localStorage.setItem("./filter.json", data);
+    // fileSystem.writeFile("./filter.json", data, err=>{
+    //     if(err)
+    //     {
+    //         console.log("Error writing file" ,err);
+    //     }
+    //     else
+    //     {
+    //         console.log('JSON data is written to the file successfully');
+    //     }
+    // })
 }
 
 function Cut()
