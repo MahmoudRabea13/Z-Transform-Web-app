@@ -1,8 +1,4 @@
-/* * {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  } */
+
 .filter_design{
     display: flex;
     flex-direction: row;
@@ -158,11 +154,69 @@ a{
     margin-left: 11%;
     border-radius: 12%;
     margin-top: 9%;
-
 }
-
 #output-plot{
     z-index: 2;
     margin-top: -83%;
 }
 
+#generate-sig{
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    background-color: red;
+    border: 1px solid #000;
+    border-radius: 100px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    margin-left: 22%;
+    margin-top: 0%;
+    width: 32%;
+    
+    
+}
+
+#generate-sig:hover{
+    background-color: blue;
+}
+
+
+#import-sig{
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    background-color: red;
+    border: 1px solid #000;
+    border-radius: 100px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    display: flex;
+    margin-left: 57%;
+    margin-top: -7%;
+    width: 30%;
+    
+}
+
+#import-sig:hover{
+    background-color: blue;
+    
+}
+
+/* #import-signal{
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    background-color: red;
+    border: 1px solid #000;
+    border-radius: 100px;
+    cursor: pointer;
+ 
+    display: flex;
+    margin-left: 55%;
+    margin-top: 0%;
+    min-width: 15%;
+}
+
+#import-signal:hover{
+    background-color: blue;
+    
+} */
