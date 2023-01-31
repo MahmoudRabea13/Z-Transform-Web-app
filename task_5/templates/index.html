@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<meta charset="utf-8" />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/static/css/styles.css" />
+	
+</head>
+
+<body>
+    <section class="filter_design">
+        <div class="first" >
+            <input type="file" id="real-input" hidden="hidden">
+            <button id="custome_button">Import filter</button>
+            <span id="custom-text">No file chosen</span>
+
+            <button id="btn_1">zeros</button>
+            <button id="btn_2">poles</button>
+            
+            <div id="magplot" style="width: 300px; height:300px;">
+                <canvas class="flotr-canvas" width="300" height="300" ></canvas>
+                <canvas class="flotr-overlay" width="300" height="300" ></canvas>
+            </div>
+            <div class="joo">
+                <a href="filter.json" download id="downloaded">Export filter</a>
+            </div>
+        </div>
+        <div id="second">
+            <div id="mag-plot" style="width: 500px; height:300px;"></div>
+            <div id="phase-plot" style="width: 500px; height:300px;"></div>
+        </div>
+        <div id="third" >
+            <div id="pad" >  </div>
+            <div id="live-plot"  style="margin-left: -173%; margin-top: 19%; width: 170%; height: 60%;"></div>
+            <div id="output-plot"></div> 
+        </div>
+    </section>
+    
+    <button id="btn_3"   >correct phase</button>
+
+</body>
+<script src="/static/js/main.js" > </script>
+<script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
+</html>
