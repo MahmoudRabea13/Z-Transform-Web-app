@@ -32,34 +32,7 @@ document.getElementById('btn_3').addEventListener("click", function(){
     location.href = "/catalog";
 })
 
-document.getElementById('btn_1').addEventListener('click', function(){
-    var xhr = new XMLHttpRequest();
-    var JSON_sent = 'ana teb3t';
-    xhr.open('POST', '/filter', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onload = function (e) {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log('success')
-            console.log(JSON.parse(xhr.response))
-            Plotly.newPlot('mag-plot', [{
-                x: JSON.parse(xhr.response)['frequency'],
-                y: JSON.parse(xhr.response)['magnitude'],
-                type: 'scatter',
-            }]);  
-            Plotly.newPlot('phase-plot', [{
-                x: JSON.parse(xhr.response)['frequency'],
-                y: JSON.parse(xhr.response)['phase'],
-                type: 'scatter'
-            }]);  
-
-            
-        } else {
-            console.log(xhr.responseText);
-        }
-        };
-        xhr.send(JSON.stringify(JSON_sent));
         
-    })
 
 const gen = document.getElementById('pad');
 gen.addEventListener("mousemove", (event) => {
@@ -207,9 +180,30 @@ function mouseupHandler()
         createPole();
     }
     draw();
-    ///////////////////////////  هنااااااااا    ///////////////////////////////
-    let zeros = [] ;
-    let poles = [] ;
+    var xhr = new XMLHttpRequest();
+    var JSON_sent = {zeros,poles};
+    xhr.open('POST', '/filter', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function (e) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log('success')
+            console.log(JSON_sent['zeros'])
+            //console.log(JSON.parse(xhr.response))
+              Plotly.newPlot('mag-plot', [{
+                x: JSON.parse(xhr.response)['frequency'],
+                y: JSON.parse(xhr.response)['magnitude'],
+                type: 'scatter',
+            }]);  
+            Plotly.newPlot('phase-plot', [{
+                x: JSON.parse(xhr.response)['frequency'],
+                y: JSON.parse(xhr.response)['phase'],
+                type: 'scatter'
+            }]);   
+        } else {
+            console.log(xhr.responseText);
+        }
+        };
+        xhr.send(JSON.stringify(JSON_sent));
 }
 
 function konvaInit(container)
