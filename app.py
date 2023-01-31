@@ -44,7 +44,7 @@ def allpass():
         print(value)
         process.all_pass(float(value))
         frequency, magnitude,phase = process.get_response()
-        response = {'frequency':frequency.tolist(),'magnitude':magnitude.tolist(),'phase':phase.tolist()}
+        response = {'frequency':frequency.tolist(),'phase':phase.tolist()}
         return json.dumps(response)
     else:
         return render_template('catalog.html')
@@ -56,7 +56,7 @@ def applyallpass():
         print(value)
         process.add_all_pass(float(value))
         frequency, magnitude,phase = process.get_response()
-        response = {'frequency':frequency.tolist(),'magnitude':magnitude.tolist(),'phase':phase.tolist()}
+        response = {'frequency':frequency.tolist(),'phase':phase.tolist()}
         return json.dumps(response)
     else:
         return render_template('catalog.html')
