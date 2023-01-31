@@ -1,3 +1,11 @@
+let stage = 0 ;
+let layer = 0;
+let zeros = [] ;
+let poles = [] ;
+let flag = 0 ;
+let pole_index = -1 ;
+let zero_index = -1 ;
+
 const realInputBtn = document.getElementById ("real-input");
 const customeBtn = document.getElementById ("custome_button");
 const customText = document.getElementById ("custom-text");
@@ -52,12 +60,6 @@ document.getElementById('btn_1').addEventListener('click', function(){
         xhr.send(JSON.stringify(JSON_sent));
         
     })
-    
-
-
-
-
-
 
 const gen = document.getElementById('pad');
 gen.addEventListener("mousemove", (event) => {
@@ -142,3 +144,222 @@ document.getElementById ("import-signal").addEventListener("change", function(){
         document.getElementById('custom-text2').style.display= 'hidden';
     }
 })
+
+//////////////////////////////////////////////////////////////////////
+
+// Create the stage and a layer to draw on.
+//konvaInit('canvas-container');
+konvaInit('magplot');
+
+//stageArray[0].on("click", function() { click(0); } );
+stage.on("mousedown", function() { mousedownHandler(); });
+stage.on("mouseup", function() { mouseupHandler(); });
+
+function click(x)
+{
+    if(flag === 0)
+    {
+        createZero();
+    }
+    else if (flag === 1)
+    {
+        createPole();
+    }
+    draw();
+}
+
+function mousedownHandler()
+{
+    xOld = stage.getPointerPosition().x;
+
+    yOld = stage.getPointerPosition().y;
+
+    if (flag === 1)
+    {
+        poles.map((element, index) => {
+            if ( (Math.abs(element.x - xOld) < 6) && (Math.abs(element.y - yOld) < 6 ) )
+            {
+                pole_index = index;
+            }
+        }
+        )
+    }
+    else
+    {
+        zeros.map((element, index) => {
+            if ( (Math.abs(element.x - xOld) < 4) && (Math.abs(element.y - yOld) < 4 ) )
+            {
+                zero_index = index;
+            }
+        }
+        )
+    }
+}
+
+function mouseupHandler()
+{
+    if(flag === 0)
+    {
+        createZero();
+    }
+    else if (flag === 1)
+    {
+        createPole();
+    }
+    draw();
+}
+
+function konvaInit(container)
+{
+    stage = new Konva.Stage({
+        container: container,
+        width: 300,
+        height: 300,
+        background: 'white',
+    });
+    var Yaxis = new Konva.Line({
+        points: [150, 0, 150,300],
+        stroke: 'red',
+        strokeWidth: 2,
+        lineCap: 'round',
+        lineJoin: 'round',
+    });
+    var Xaxis = new Konva.Line({
+        points: [0, 150, 300, 150],
+        stroke: 'red',
+        strokeWidth: 2,
+        lineCap: 'round',
+        lineJoin: 'round',
+    });
+    var unitCircle = new Konva.Circle({
+        x: 150,
+        y: 150,
+        radius: 140,
+        stroke: 'red',
+        strokeWidth: 1,
+      });
+    layer = new Konva.Layer();
+    stage.add(layer);
+    layer.add(Yaxis);
+    layer.add(Xaxis);
+    layer.add(unitCircle);
+    stage.draw();
+}
+
+function createZero()
+{
+    xstart = stage.getPointerPosition().x;
+    ystart = stage.getPointerPosition().y;
+    var zero = new Konva.Circle({
+        x: xstart,
+        y: ystart,
+        radius: 4,
+        fill: 'black',
+        stroke: 'black',
+        strokeWidth: 1,
+        draggable: true,
+      });
+    if (zero_index === -1 )
+    {
+         zeros.push({x : ((xstart-150)/140) , y : ((150-ystart)/140) , zeroo: zero });
+    }
+   else
+   {
+       console.log(zeros);
+       console.log(xstart);
+       console.log(ystart);
+       (zeros[zero_index].zeroo).destroy();
+       zeros[zero_index] = {x : ((xstart-150)/140) , y : ((150-ystart)/140) , zeroo: zero };
+       //zero_index = -1;
+   }
+}
+
+function createPole()
+{
+    xstart = stage.getPointerPosition().x;
+    ystart = stage.getPointerPosition().y;
+    var pole = new Konva.Line({
+        points: [xstart , ystart , xstart +6 , ystart +6 , xstart +3 , ystart +3 , xstart , ystart +6 , xstart +6, ystart],
+        stroke: 'black',
+        strokeWidth: 2,
+        lineCap: 'round',
+        lineJoin: 'round',
+        draggable: true,
+    });
+    if ( pole_index === -1)
+    {
+        poles.push({x : ((xstart-150)/140) , y : ((150-ystart)/140) , pole: pole });
+    }
+    else
+    {
+        console.log(xstart);
+        console.log(ystart);
+        console.log(pole_index);
+        (poles[pole_index].pole).destroy();
+        poles[pole_index] = {x : ((xstart-150)/140) , y : ((150-ystart)/140) , pole: pole };
+        //pole_index = -1;
+    }
+    //console.log(poles);
+}
+
+function draw()
+{
+    for (let i = 0; i < poles.length; i++){
+        layer.add(poles[i].pole);
+    }
+    for (let m = 0; m < zeros.length; m++){
+        layer.add(zeros[m].zeroo);
+    }
+    layer.draw();
+}
+
+function zeroFlag()
+{
+    flag = 0;
+}
+
+function poleFlag()
+{
+    flag = 1;
+}
+
+function Cut()
+{
+    flag = 2;
+    console.log(pole_index)
+    console.log(poles)
+    console.log(zero_index)
+    console.log(zeros)
+}
+
+var container = stage.container();
+// make it focusable
+container.tabIndex = 1;
+// focus it
+// also stage will be in focus on its click
+container.focus();
+container.addEventListener('keydown', function (e) {
+    if (e.keyCode === 46)
+    {
+        console.log(pole_index);
+        if (pole_index !== -1 )
+        {
+            (poles[pole_index].pole).destroy();
+            poles.splice(pole_index,1);
+        }
+        if (zero_index !== -1)
+        {
+            (zeros[zero_index].zeroo).destroy();
+            zeros.splice(zero_index,1);
+        }
+        pole_index = -1;
+        zero_index = -1;
+    }
+    else
+    {
+        zero_index = -1;
+        pole_index = -1;
+        return;
+    }
+    e.preventDefault();
+});
