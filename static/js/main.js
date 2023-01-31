@@ -76,12 +76,13 @@ function update_graph(x) {
 
 
 document.getElementById('generate-sig').addEventListener('click',function(){
-    document.getElementById('generate-sig').disabled = true;
+    /* document.getElementById('generate-sig').disabled = true; */
     document.getElementById('import-sig').disabled = false;
+
+    document.getElementById('container').style.display = "flex";
 })
 
 document.getElementById('import-sig').addEventListener('click',function(){
-    //document.getElementById('import-sig').disabled = true;
     document.getElementById('generate-sig').disabled = false;
     document.getElementById ("import-signal").click();
 
@@ -89,6 +90,7 @@ document.getElementById('import-sig').addEventListener('click',function(){
 document.getElementById ("import-signal").addEventListener("change", function(){
     if (document.getElementById ("import-signal").value){
         document.getElementById('custom-text2').innerHTML=document.getElementById ("import-signal").value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+        document.getElementById('container').style.display = "none"   ;
         var xhr = new XMLHttpRequest();
         const formData = new FormData();
         const files = document.getElementById("import-signal");
@@ -106,7 +108,6 @@ document.getElementById ("import-signal").addEventListener("change", function(){
                         y: JSON.parse(xhr.response)['y_new'],
                         type: 'scatter'
                     }]); 
-                    
             } else {
                 console.log(xhr.response);
             }
@@ -118,6 +119,18 @@ document.getElementById ("import-signal").addEventListener("change", function(){
     }
 })
 
+/* function honksh(){
+    down=document.getElementById('pad');
+    container = document.getElementById('container');
+    divAbove = document.createElement("div");
+    divAbove.id = "up";
+    divAbove.style.backgroundColor  = "white";
+    divAbove.style.width = "83%"
+    divAbove.style.height = "300px"
+    divAbove.innerHTML = "hehe"
+
+    container.insertBefore(divAbove, down);
+} */
 //////////////////////////////////////////////////////////////////////
 
 // Create the stage and a layer to draw on.
