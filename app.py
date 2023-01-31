@@ -35,8 +35,8 @@ def catalog():
 @app.route("/filter" ,methods=['GET','POST'])
 def filter():
     if request.method == 'POST': 
-        value = request.json
-        print(value)
+        zeros = request.json['zeros']
+        poles = request.json['poles']
         frequency, magnitude,phase = process.get_response()
         response = {'frequency':frequency.tolist(),'magnitude':magnitude.tolist(),'phase':phase.tolist()}
         return json.dumps(response)
@@ -76,6 +76,10 @@ def importsignal():
         return json.dumps(response)
     else:
         return render_template('index.html')
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
