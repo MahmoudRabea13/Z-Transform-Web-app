@@ -9,8 +9,8 @@ import pandas as pd
 app = Flask( __name__ )
 process = Process()
 filter = Filter()
-# process.set_filter([-0.2,-0.5,0.98], [-0.99,0.5,0.2+0.6j], 1)
-# process.set_filter([1.3], [], 1)
+
+
 def convert_to_complex(input):
     out = []
     for i in range(len(input)):
@@ -27,12 +27,7 @@ def image():
         return render_template('index.html')
 
 
-
-@app.route("/catalog" ,methods=['POST','GET'])
-def catalog():
-    if request.method == 'POST':
-        pass
-    return render_template('catalog.html')
+        
 @app.route("/filter" ,methods=['GET','POST'])
 def filter():
     if request.method == 'POST': 
@@ -57,7 +52,7 @@ def allpass():
         response = {'frequency':frequency.tolist(),'phase':phase.tolist()}
         return json.dumps(response)
     else:
-        return render_template('catalog.html')
+        return render_template('index.html')
 @app.route("/applyallpass" ,methods=['GET','POST'])
 def applyallpass():
     if request.method == 'POST': 
@@ -65,10 +60,10 @@ def applyallpass():
         print(value)
         process.add_all_pass(complex(value))
         frequency, magnitude,phase = process.get_response()
-        response = {'frequency':frequency.tolist(),'phase':phase.tolist()}
+        response = {'frequency':frequency.tolist(),'phase':phase.tolist(),'magnitude':magnitude.tolist()}
         return json.dumps(response)
     else:
-        return render_template('catalog.html')
+        return render_template('index.html')
 
 @app.route("/importsignal" ,methods=['GET','POST'])
 def importsignal():
