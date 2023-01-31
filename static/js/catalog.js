@@ -13,7 +13,7 @@ document.getElementById('submit-all-pass').addEventListener('click', function(e)
             console.log('success')
             console.log(JSON.parse(xhr.response))
             var node = document.createElement('li');
-            node.appendChild(document.createTextNode(JSON.parse(xhr.response)));
+            node.appendChild(document.createTextNode(document.getElementById('all-pass').value));
             document.getElementById('list').appendChild(node)
           Plotly.newPlot('submitpassplot', [{
                 x:JSON.parse(xhr.response)['frequency'] ,
