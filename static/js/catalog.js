@@ -1,5 +1,10 @@
 document.getElementById('btn_4').addEventListener("click", function(){
-    location.href = "/";
+    //location.href = "/";
+    //a =localStorage.getItem('content');
+    document.getElementById('cat').style.display = 'none';
+    document.getElementById('first-page').style.display = 'block';
+    console.log('suceesss')
+    
 });
 document.getElementById('submit-all-pass').addEventListener('click', function(e){
     e.preventDefault();
@@ -43,8 +48,23 @@ document.getElementById('apply-all-pass').addEventListener('click', function(e){
                 x:JSON.parse(xhr.response)['frequency'] ,
                 y:JSON.parse(xhr.response)['phase']  ,
                 type: 'scatter',
-            }]) 
+            }]);
+            Plotly.newPlot('mag-plot', [{
+            width: 300,
+            height: 300,
+            x: JSON.parse(xhr.response)['frequency'],
+            y: JSON.parse(xhr.response)['magnitude'],
+            type: 'scatter',
+            }]); 
+            Plotly.newPlot('phase-plot', [{
+            width: 300,
+            height: 300,
+            x: JSON.parse(xhr.response)['frequency'],
+            y: JSON.parse(xhr.response)['phase'],
+            type: 'scatter'
+            }]); 
         }};  
+
     xhr.send(JSON.stringify(JSON_sent));
 });
 
