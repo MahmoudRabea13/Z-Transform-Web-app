@@ -11,6 +11,10 @@ process = Process()
 filter = Filter()
 # process.set_filter([-0.2,-0.5,0.98], [-0.99,0.5,0.2+0.6j], 1)
 process.set_filter([1.3], [], 1)
+def convert_to_complex(input):
+    out = []
+    for i in range(len(input['x'])):
+        out.append(input['x'][i]+input['y'][i]*1j)
 @app.route("/" ,methods=['POST','GET'])
 def image():
     if request.method == 'POST':
