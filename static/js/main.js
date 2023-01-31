@@ -71,8 +71,6 @@ gen.addEventListener("mousemove", (event) => {
             console.log(JSON.parse(xhr.response))
             Plotly.newPlot('output-plot', [{
                 x: x_s,
-                // هنا اللقطة انك تباصي الy الجديد بعد الفترة 
-                // انا هنا ضربت ف الجافاسكريبت
                 y: JSON.parse(xhr.response).map(function(x) { return x; }),
                type: 'scatter'
             }]);
@@ -98,3 +96,38 @@ function update_graph(x) {
     }]);
 
 }
+
+
+document.getElementById('generate-sig').addEventListener('click',function(){
+    document.getElementById('generate-sig').disabled = true;
+    document.getElementById('import-sig').disabled = false;
+})
+
+document.getElementById('import-sig').addEventListener('click',function(){
+    //document.getElementById('import-sig').disabled = true;
+    document.getElementById('generate-sig').disabled = false;
+    document.getElementById ("import-signal").click();
+
+})
+document.getElementById ("import-signal").addEventListener("change", function(){
+    if (document.getElementById ("import-signal").value){
+        document.getElementById('custom-text2').innerHTML=document.getElementById ("import-signal").value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+        var xhr = new XMLHttpRequest();
+        const formData = new FormData();
+        const files = document.getElementById("import-signal");
+        formData.append("imported-signal", files.files[0] );
+        xhr.open('POST', '/importsignal', true);
+        xhr.onload = function (e) {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log('sucess import')
+                    console.log(xhr.response)
+            } else {
+                console.log(xhr.response);
+            }
+        };
+        xhr.send(formData);
+    }
+    else{
+        document.getElementById('custom-text2').style.display= 'hidden';
+    }
+})
