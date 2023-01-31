@@ -1,0 +1,153 @@
+
+.filter_design{
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    height: 755px;
+
+}
+
+.first{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(39 43 48);
+    border-radius: 8px;
+    padding: 20px;
+    min-width: 18%;
+}
+#second{
+    min-width: 50%;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
+
+}
+
+#third{
+    min-width: 29%;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+
+
+#custome_button{
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    background-color: red;
+    border: 1px solid #000;
+    border-radius: 100px;
+    cursor: pointer;
+    position: relative;
+    top: -130px;
+}
+
+#custome_button:hover{
+    background-color: blue;
+}
+
+#custom-text{
+    margin-left: 10px;
+    font-family: sans-serif;
+    color: #aaa;
+    top: -114px;
+    
+    position: relative;
+}
+#btn_1{
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    background-color: red;
+    border: 1px solid #000;
+    border-radius: 100px;
+    cursor: pointer;
+    position: relative;
+    top:-69px;
+}
+#btn_1:hover{
+    background-color: blue;
+}
+#btn_2{
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    background-color: red;
+    border: 1px solid #000;
+    border-radius: 100px;
+    cursor: pointer;
+}
+#btn_2:hover{
+    background-color: blue;
+}
+.joo{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    background-color: red;
+    border: 1px solid #000;
+    border-radius: 100px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: small;
+    position: relative;
+    top: 68px;
+}
+.joo:hover{
+    background-color: blue;
+}
+
+#downloaded{
+    display: flex;
+    justify-content: center;
+    padding: 2px;
+    color: rgb(255, 255, 255);
+    /* background-color: red; */
+    border-radius: 100px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: small;
+    
+}
+#downloaded:hover{
+    background-color: blue;
+
+}
+
+
+.flotr-canvas{
+    position: absolute; left: 28px; top: 281px; width: fit-content; height: fit-content;
+}
+.flotr-overlay{
+    position: absolute; left: 28px; top: 281px; width: fit-content; height: fit-content;
+}
+
+#btn_3{
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    background-color: red;
+    border: 1px solid #000;
+    border-radius: 100px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    min-width: 30%;
+    margin-left: 34%;
+    margin-top: 3%;
+    text-decoration: none;
+}
+#btn_3:hover{
+    background-color: blue;
+}
+
+a{
+    text-decoration: none;
+}
+
+#pad{
+    display: flex;
+    background-color: rgb(39 43 48);
+    border-radius: 8px;   
+    width: 300px;
+    height: 200px;
+}
