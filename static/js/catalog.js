@@ -3,6 +3,7 @@ document.getElementById('btn_4').addEventListener("click", function(){
 });
 document.getElementById('submit-all-pass').addEventListener('click', function(e){
     e.preventDefault();
+    document.getElementById('apply-all-pass').disabled = false;
     console.log(document.getElementById('all-pass').value)
     var xhr = new XMLHttpRequest();
     var JSON_sent = document.getElementById('all-pass').value;
@@ -29,6 +30,7 @@ document.getElementById('submit-all-pass').addEventListener('click', function(e)
 
 document.getElementById('apply-all-pass').addEventListener('click', function(e){
     e.preventDefault();
+    document.getElementById('apply-all-pass').disabled = true;
     var xhr = new XMLHttpRequest();
     var JSON_sent = document.getElementById('all-pass').value;
     xhr.open('POST', '/applyallpass', true);
