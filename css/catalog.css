@@ -194,3 +194,6 @@
 a{
     text-decoration: none;
 }
+#list{
+    cursor: no-drop;
+}
