@@ -5,6 +5,8 @@ pad =document.getElementById('pad')
 signal = []
 x_s = [0]
 x_val = 0
+import1 = []
+import2 = []
 custome_button.addEventListener("click", function(){
     realInputBtn.click();
 })
@@ -71,7 +73,7 @@ gen.addEventListener("mousemove", (event) => {
             console.log(JSON.parse(xhr.response))
             Plotly.newPlot('output-plot', [{
                 x: x_s,
-                y: JSON.parse(xhr.response).map(function(x) { return x; }),
+                y: JSON.parse(xhr.response),
                type: 'scatter'
             }]);
             
@@ -119,8 +121,17 @@ document.getElementById ("import-signal").addEventListener("change", function(){
         xhr.open('POST', '/importsignal', true);
         xhr.onload = function (e) {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                    console.log('sucess import')
-                    console.log(xhr.response)
+                     Plotly.newPlot('live-plot', [{
+                        x: JSON.parse(xhr.response)['x'],
+                        y: JSON.parse(xhr.response)['y'],
+                        type: 'scatter'
+                    }]);
+                    Plotly.newPlot('output-plot', [{
+                        x: JSON.parse(xhr.response)['x'],
+                        y: JSON.parse(xhr.response)['y_new'],
+                        type: 'scatter'
+                    }]); 
+                    
             } else {
                 console.log(xhr.response);
             }
