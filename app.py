@@ -76,6 +76,18 @@ def importsignal():
         return json.dumps(response)
     else:
         return render_template('index.html')
+@app.route("/importfilter" ,methods=['GET','POST'])
+def importfilter():
+    if request.method == 'POST': 
+        value = request.files.get('imported-filter')
+        print(value.filename)
+        #importedsig = pd.read_csv('./static/imported-signals/'+value.filename)
+        # print(importedsig['x'])
+        #new_signal = process.apply_filter(importedsig['y'])
+        #response = {'x':importedsig['x'].tolist(),'y':importedsig['y'].tolist(),'y_new':new_signal.tolist()}
+        return 'yessss'
+    else:
+        return render_template('index.html')
 @app.route("/download", methods=['GET','POST'])
 def export_filter():
     if request.method == 'POST':
@@ -87,6 +99,7 @@ def export_filter():
             with open("filter.json", "w") as outfile:
                     outfile.write(str(to_json))
     return 'success'
+
 
 
 
