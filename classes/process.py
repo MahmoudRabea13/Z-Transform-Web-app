@@ -15,12 +15,14 @@ class Process():
         numrator , denominator = signal.zpk2tf(self.filter.zeros,self.filter.poles, 1)
         new_signal = signal.lfilter(numrator, denominator, values)
         return new_signal.real
-    def add_all_pass(self, a:complex)-> None:
-        self.filter.all_pass(a)
+    def add_all_pass(self, a)-> None:
+        self.filter.one_all_pass(a)
     def all_pass(self, a):
         filter_all = Filter()
-        filter_all.all_pass(a)
+        filter_all.one_all_pass(a)
         freq , mag, phase = filter_all.get_response()
         return (freq, mag, phase)
     def get_zeros_poles(self):
         return self.filter.zeros,self.filter.poles
+    def remove_all_pass(self):
+        self.filter.remove_all_pass()

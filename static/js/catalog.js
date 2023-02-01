@@ -86,7 +86,7 @@ document.getElementById('list').addEventListener('click',function(e){
     xhr.onload = function (e) {
         if (xhr.readyState === 4 && xhr.status === 200) {
             console.log('success')
-/*              Plotly.newPlot('applypassplot', [{
+             Plotly.newPlot('applypassplot', [{
                 x:JSON.parse(xhr.response)['frequency'] ,
                 y:JSON.parse(xhr.response)['phase']  ,
                 type: 'scatter',
@@ -104,7 +104,7 @@ document.getElementById('list').addEventListener('click',function(e){
             x: JSON.parse(xhr.response)['frequency'],
             y: JSON.parse(xhr.response)['phase'],
             type: 'scatter'
-            }],layoutphase);  */
+            }],layoutphase);  
         }};  
     xhr.send(JSON.stringify(JSON_sent));
     console.log('sent successfully')

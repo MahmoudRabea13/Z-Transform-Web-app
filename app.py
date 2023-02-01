@@ -41,7 +41,6 @@ def filter():
     if request.method == 'POST': 
         zeros = request.json['zeros']
         poles = request.json['poles']
-        # print(zeros[0].get('y'))
         zeros_out = convert_to_complex(zeros)
         poles_out = convert_to_complex(poles)
         process.set_filter(zeros_out, poles_out, 1)
@@ -66,11 +65,13 @@ def applyallpass():
         value = request.json['values']
         list = request.json['list']
         deletedlist= request.json['deletedlist']
-        print(deletedlist)
-        print('ahmhsa')
-        print(list)
-        process.add_all_pass(complex(value))
+        deletedlist = deletedlist.split()
+        for i in range(len(deletedlist)):
+            deletedlist[i] = complex(deletedlist[i])
+        for i in range(len(deletedlist)):
+            process.add_all_pass(deletedlist[i])
         frequency, magnitude,phase = process.get_response()
+        process.remove_all_pass()
         response = {'frequency':frequency.tolist(),'phase':phase.tolist(),'magnitude':magnitude.tolist()}
         return json.dumps(response)
     else:
