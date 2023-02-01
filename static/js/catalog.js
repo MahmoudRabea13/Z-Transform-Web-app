@@ -25,7 +25,7 @@ document.getElementById('submit-all-pass').addEventListener('click', function(e)
                 x:JSON.parse(xhr.response)['frequency'] ,
                 y:JSON.parse(xhr.response)['phase']  ,
                 type: 'scatter',
-            }]) 
+            }],layoutaddall) 
         }
 
         };  
@@ -51,21 +51,21 @@ document.getElementById('apply-all-pass').addEventListener('click', function(e){
                 x:JSON.parse(xhr.response)['frequency'] ,
                 y:JSON.parse(xhr.response)['phase']  ,
                 type: 'scatter',
-            }]);
+            }],layoutapplyall);
             Plotly.newPlot('mag-plot', [{
             width: 300,
             height: 300,
             x: JSON.parse(xhr.response)['frequency'],
             y: JSON.parse(xhr.response)['magnitude'],
             type: 'scatter',
-            }]); 
+            }],layoutmag); 
             Plotly.newPlot('phase-plot', [{
             width: 300,
             height: 300,
             x: JSON.parse(xhr.response)['frequency'],
             y: JSON.parse(xhr.response)['phase'],
             type: 'scatter'
-            }]); 
+            }],layoutphase); 
         }};  
     xhr.send(JSON.stringify(JSON_sent));
 });
@@ -90,23 +90,72 @@ document.getElementById('list').addEventListener('click',function(e){
                 x:JSON.parse(xhr.response)['frequency'] ,
                 y:JSON.parse(xhr.response)['phase']  ,
                 type: 'scatter',
-            }]);
+            }],layoutapplyall);
             Plotly.newPlot('mag-plot', [{
             width: 300,
             height: 300,
             x: JSON.parse(xhr.response)['frequency'],
             y: JSON.parse(xhr.response)['magnitude'],
             type: 'scatter',
-            }]); 
+            }],layoutmag); 
             Plotly.newPlot('phase-plot', [{
             width: 300,
             height: 300,
             x: JSON.parse(xhr.response)['frequency'],
             y: JSON.parse(xhr.response)['phase'],
             type: 'scatter'
-            }]);  */
+            }],layoutphase);  */
         }};  
     xhr.send(JSON.stringify(JSON_sent));
     console.log('sent successfully')
 })
 
+
+var layoutaddall = {
+    title: {
+      text:'all pass filter',
+      font: {
+        family: 'Courier New, monospace',
+        size: 24
+      },
+  }};
+  var layoutapplyall = {
+    title: {
+      text:'filtered signal',
+      font: {
+        family: 'Courier New, monospace',
+        size: 24
+      },
+  }};
+  var layoutinput = {
+    title: {
+      text:'Input Signal',
+      font: {
+        family: 'Courier New, monospace',
+        size: 24
+      },
+  }};
+  var layoutoutput = {
+    title: {
+      text:'Output Signal',
+      font: {
+        family: 'Courier New, monospace',
+        size: 24
+      },
+  }};
+  var layoutmag = {
+    title: {
+      text:'Magnitude Response',
+      font: {
+        family: 'Courier New, monospace',
+        size: 24
+      },
+  }};
+  var layoutphase = {
+    title: {
+      text:'Phase Response',
+      font: {
+        family: 'Courier New, monospace',
+        size: 24
+      },
+  }};
