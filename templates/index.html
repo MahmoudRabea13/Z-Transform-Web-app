@@ -25,9 +25,9 @@
 
             <div id="magplot" style="width: 300px; height:300px; margin-top: 3%; margin-left: 6%; position: relative; top: 4%; background-color: #ccc;">
             </div>
-            <div class="joo">
-<!--                <a href="filter.json" download id="downloaded">Export filter</a>-->
-                <button id="downloaded" onclick="filterDownload()">Export filter</button>
+                <form action="/download" method="POST"> 
+                <button class="joo" id="downloaded" value="0" >EXport Filter</button>
+                </form>
             </div>
         </div>
         <div id="second">
