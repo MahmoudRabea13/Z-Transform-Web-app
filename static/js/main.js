@@ -20,15 +20,6 @@ custome_button.addEventListener("click", function(){
     realInputBtn.click();
 })
 
-realInputBtn.addEventListener("change", function(){
-    if (realInputBtn.value){
-        customText.innerHTML=realInputBtn.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
-    }
-    else{
-        customText.innerHTML="No file chosen"
-    }
-})
-
 document.getElementById('btn_3').addEventListener("click", function(){
     document.getElementById('cat').style.display = 'block';
     document.getElementById('first-page').style.display = 'none';
@@ -140,6 +131,22 @@ document.getElementById('import-sig').addEventListener('click',function(){
     document.getElementById('generate-sig').disabled = false;
     document.getElementById ("import-signal").click();
 
+})
+realInputBtn.addEventListener("change", function(){
+    if (realInputBtn.value){
+        customText.innerHTML=realInputBtn.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+        var xhr = new XMLHttpRequest();
+        const formData = new FormData();
+        formData.append("imported-filter", realInputBtn.files[0] );
+        xhr.open('POST', '/importfilter', true);
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log('ana geeet')
+        }
+            xhr.send(formData);
+    }
+    else{
+        customText.innerHTML="No file chosen"
+    }
 })
 document.getElementById ("import-signal").addEventListener("change", function(){
     if (document.getElementById ("import-signal").value){
