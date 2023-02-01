@@ -45,7 +45,7 @@
 }
 
 #custome_button:hover{
-    background-color: blue;
+    background-color: rgb(177, 172, 172);
 }
 
 #custom-text{
@@ -67,7 +67,7 @@
     top:-69px;
 }
 #btn_1:hover{
-    background-color: blue;
+    background-color: rgb(177, 172, 172);
 }
 #btn_2{
     padding: 10px;
@@ -78,9 +78,9 @@
     cursor: pointer;
 }
 #btn_2:hover{
-    background-color: blue;
+    background-color: rgb(177, 172, 172);
 }
-.joo{
+.download{
     display: flex;
     justify-content: center;
     padding: 10px;
@@ -95,7 +95,7 @@
     top: 68px;
 }
 .joo:hover{
-    background-color: blue;
+    background-color: rgb(177, 172, 172);
 }
 
 #downloaded{
@@ -111,10 +111,10 @@
     font-size: small;
     position: relative;
     top: 68px;
-    
+    margin-left: 117px;
 }
 #downloaded:hover{
-    background-color: blue;
+    background-color: rgb(177, 172, 172);
 
 }
 
@@ -141,7 +141,7 @@
     text-decoration: none;
 }
 #btn_3:hover{
-    background-color: blue;
+    background-color: rgb(177, 172, 172);
 }
 
 a{
@@ -151,6 +151,15 @@ a{
 .pad{
     display: flex;
     background-color: rgb(39 43 48);
+    border-radius: 8px;   
+    width: 83%;
+    height: 200px;
+    margin-left: 11%;
+    border-radius: 12%;
+    margin-top: 9%;
+}
+.padreplacment{
+    background-color: white;
     border-radius: 8px;   
     width: 83%;
     height: 200px;
@@ -180,7 +189,7 @@ a{
 }
 
 #generate-sig:hover{
-    background-color: blue;
+    background-color: rgb(177, 172, 172);
 }
 
 
@@ -201,28 +210,11 @@ a{
 }
 
 #import-sig:hover{
-    background-color: blue;
+    background-color: rgb(177, 172, 172);
     
 }
 
-/* #import-signal{
-    padding: 10px;
-    color: rgb(255, 255, 255);
-    background-color: red;
-    border: 1px solid #000;
-    border-radius: 100px;
-    cursor: pointer;
- 
-    display: flex;
-    margin-left: 55%;
-    margin-top: 0%;
-    min-width: 15%;
-}
 
-#import-signal:hover{
-    background-color: blue;
-    
-} */
 
 .correction{
     display: flex;
@@ -376,7 +368,6 @@ a{
     justify-content: center;
     background-color: #b7b7b7;
     border-radius: 8px;
-    /* padding: 20px; */
     width: 50%;
 }
 
@@ -386,7 +377,6 @@ a{
     justify-content: center;
     background-color: #b7b7b7;
     border-radius: 8px;
-    /* padding: 20px; */
     width: 50%;
 }
 
@@ -415,7 +405,7 @@ a{
     text-decoration: none;
 }
 #btn_4:hover{
-    background-color: blue;
+    background-color: rgb(177, 172, 172);
 }
 a{
     text-decoration: none;
@@ -455,7 +445,7 @@ a{
 }
 
 #submit-all-pass:hover{
-    background-color: blue;
+    background-color: rgb(177, 172, 172);
 
 }
 #apply-all-pass{
@@ -474,20 +464,16 @@ a{
 }
 
 #apply-all-pass:hover{
-    background-color: blue;
+    background-color: rgb(177, 172, 172);
 }
 
 #all-pass{
-    /* padding: 10px;
-    color: rgb(255, 255, 255);
-    background-color: red; */
     border: 1px solid #000;
     border-radius: 100px;
     cursor: pointer;
-    /* display: flex;
-    justify-content: center; */
+
     min-width: 13%;
     margin-left: 17%;
     margin-top: -3%;
-    /* text-decoration: none; */
+    
 }
