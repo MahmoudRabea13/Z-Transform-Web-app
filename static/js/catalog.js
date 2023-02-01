@@ -37,7 +37,10 @@ document.getElementById('apply-all-pass').addEventListener('click', function(e){
     e.preventDefault();
     document.getElementById('apply-all-pass').disabled = true;
     var xhr = new XMLHttpRequest();
-    var JSON_sent = document.getElementById('all-pass').value;
+
+    list =document.getElementById('list').innerText
+    values =document.getElementById('all-pass').value
+    var JSON_sent = {values,list};
     xhr.open('POST', '/applyallpass', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload = function (e) {
@@ -64,7 +67,6 @@ document.getElementById('apply-all-pass').addEventListener('click', function(e){
             type: 'scatter'
             }]); 
         }};  
-
     xhr.send(JSON.stringify(JSON_sent));
 });
 
