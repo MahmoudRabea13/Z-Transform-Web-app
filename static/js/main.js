@@ -44,7 +44,7 @@ gen.addEventListener("mousemove", (event) => {
                 x: x_s,
                 y: JSON.parse(xhr.response),
                type: 'scatter'
-            }]);
+            }],layoutoutput);
             
         } else {
             console.log(xhr.responseText);
@@ -64,7 +64,7 @@ function update_graph(x) {
         x: x_s,
         y: signal,
         type: 'scatter'
-    }]);
+    }],layoutinput);
 
 }
 function import_graph(x_point,y_point,y_new_point){ 
@@ -86,13 +86,13 @@ Plotly.newPlot('live-plot', [{
   y: YArray,
   mode: 'scatter',
   line: {color: '#80CAF6'}
-}]);
+}],layoutinput);
 Plotly.newPlot('output-plot', [{
     x:XArray,
     y: Y_newArray,
     mode: 'scatter',
     line: {color: '#80CAF6'}
-  }]);
+  }],layoutoutput);
 
 var cnt = 0;
 
@@ -124,7 +124,8 @@ document.getElementById('generate-sig').addEventListener('click',function(){
     /* document.getElementById('generate-sig').disabled = true; */
     document.getElementById('import-sig').disabled = false;
 
-    document.getElementById('container').style.display = "flex";
+    document.getElementById('pad').style.display = "flex"   ;
+    document.getElementById('padreplacement').style.display = "none"   ;
 })
 
 document.getElementById('import-sig').addEventListener('click',function(){
@@ -145,12 +146,12 @@ realInputBtn.addEventListener("change", function(){
                 x: JSON.parse(xhr.response)['frequency'],
                 y: JSON.parse(xhr.response)['magnitude'],
                 type: 'scatter',
-            }]);  
+            }],layoutmag);  
             Plotly.newPlot('phase-plot', [{
                 x: JSON.parse(xhr.response)['frequency'],
                 y: JSON.parse(xhr.response)['phase'],
                 type: 'scatter'
-            }]);   
+            }],layoutphase);   
         };
 
         }
@@ -163,7 +164,9 @@ realInputBtn.addEventListener("change", function(){
 document.getElementById ("import-signal").addEventListener("change", function(){
     if (document.getElementById ("import-signal").value){
         document.getElementById('custom-text2').innerHTML=document.getElementById ("import-signal").value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
-        document.getElementById('container').style.display = "none"   ;
+        document.getElementById('pad').style.display = "none"   ;
+        document.getElementById('padreplacement').style.display = "flex"   ;
+        
         var xhr = new XMLHttpRequest();
         const formData = new FormData();
         const files = document.getElementById("import-signal");
@@ -176,22 +179,11 @@ document.getElementById ("import-signal").addEventListener("change", function(){
 
                     }
                     else{
-                        console.log("msh zy b3d")
                         break;
                     }
                  }
                     import_graph(JSON.parse(xhr.response)['x'],JSON.parse(xhr.response)['y'],JSON.parse(xhr.response)['y_new'])
-                    // Plotly.newPlot('live-plot', [{
 
-                    //     x: JSON.parse(xhr.response)['x'],
-                    //     y: JSON.parse(xhr.response)['y'],
-                    //     type: 'scatter'
-                    // }]);
-                    // Plotly.newPlot('output-plot', [{
-                    //     x: JSON.parse(xhr.response)['x'],
-                    //     y: JSON.parse(xhr.response)['y_new'],
-                    //     type: 'scatter'
-                    // }]); 
             } else {
                 console.log(xhr.response);
             }
@@ -205,13 +197,12 @@ document.getElementById ("import-signal").addEventListener("change", function(){
 })
 
 
-//////////////////////////////////////////////////////////////////////
 
 // Create the stage and a layer to draw on.
 //konvaInit('canvas-container');
 konvaInit('magplot');
 
-//stageArray[0].on("click", function() { click(0); } );
+
 stage.on("mousedown", function() { mousedownHandler(); });
 stage.on("mouseup", function() { mouseupHandler(); });
 
@@ -280,12 +271,12 @@ function mouseupHandler()
                 x: JSON.parse(xhr.response)['frequency'],
                 y: JSON.parse(xhr.response)['magnitude'],
                 type: 'scatter',
-            }]);  
+            }],layoutmag);  
             Plotly.newPlot('phase-plot', [{
                 x: JSON.parse(xhr.response)['frequency'],
                 y: JSON.parse(xhr.response)['phase'],
                 type: 'scatter'
-            }]);   
+            }],layoutphase);   
         } else {
             console.log(xhr.responseText);
         }
@@ -407,27 +398,7 @@ function poleFlag()
     flag = 1;
 }
 
-function filterDownload()
-{
-//     const client = {
-//         "Name": "Mini Corp.",
-//  "Order_count": 83,
-//  "Address": "Little Havana"
-// }
-    const filter = poles.concat(zeros);
-    const data = JSON.stringify(filter);
-    localStorage.setItem("./filter.json", data);
-    // fileSystem.writeFile("./filter.json", data, err=>{
-    //     if(err)
-    //     {
-    //         console.log("Error writing file" ,err);
-    //     }
-    //     else
-    //     {
-    //         console.log('JSON data is written to the file successfully');
-    //     }
-    // })
-}
+
 
 function Cut()
 {
@@ -479,3 +450,35 @@ document.getElementById('downloaded').addEventListener('click',function(e){
     console.log('succsess')
 
 })
+var layoutinput = {
+    title: {
+      text:'Input Signal',
+      font: {
+        family: 'Courier New, monospace',
+        size: 24
+      },
+  }};
+  var layoutoutput = {
+    title: {
+      text:'Output Signal',
+      font: {
+        family: 'Courier New, monospace',
+        size: 24
+      },
+  }};
+  var layoutmag = {
+    title: {
+      text:'Magnitude Response',
+      font: {
+        family: 'Courier New, monospace',
+        size: 24
+      },
+  }};
+  var layoutphase = {
+    title: {
+      text:'Phase Response',
+      font: {
+        family: 'Courier New, monospace',
+        size: 24
+      },
+  }};
