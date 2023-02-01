@@ -450,4 +450,13 @@ container.addEventListener('keydown', function (e) {
     }
     e.preventDefault();
 });
+document.getElementById('downloaded').addEventListener('click',function(e){
+    e.preventDefault();
+    var xhr = new XMLHttpRequest();
+    var JSON_sent = '1';
+    xhr.open('POST', '/download', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(JSON_sent));
+    console.log('succsess')
 
+})
