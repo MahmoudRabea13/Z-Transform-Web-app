@@ -245,6 +245,7 @@ function mousedownHandler()
         }
         )
     }
+    ////
 }
 
 function mouseupHandler()
@@ -431,6 +432,30 @@ container.addEventListener('keydown', function (e) {
         }
         pole_index = -1;
         zero_index = -1;
+        var xhr = new XMLHttpRequest();
+        var JSON_sent = {zeros,poles};
+        xhr.open('POST', '/deletepolezero', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function (e) {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log('success')
+                console.log(JSON_sent['zeros'])
+                //console.log(JSON.parse(xhr.response))
+                Plotly.newPlot('mag-plot', [{
+                    x: JSON.parse(xhr.response)['frequency'],
+                    y: JSON.parse(xhr.response)['magnitude'],
+                    type: 'scatter',
+                }],layoutmag);  
+                Plotly.newPlot('phase-plot', [{
+                    x: JSON.parse(xhr.response)['frequency'],
+                    y: JSON.parse(xhr.response)['phase'],
+                    type: 'scatter'
+                }],layoutphase);   
+            } else {
+                console.log(xhr.responseText);
+            }
+            };
+            xhr.send(JSON.stringify(JSON_sent));
     }
     else
     {
