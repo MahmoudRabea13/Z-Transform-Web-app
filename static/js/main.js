@@ -507,3 +507,90 @@ var layoutinput = {
         size: 24
       },
   }};
+// e.onmouseover = function() {
+//   document.getElementById('info').style.display = 'block';
+//   document.getElementById('info').innerHTML =
+// }
+// e.onmouseout = function() {
+//   document.getElementById('info').style.display = 'none';
+// }
+document.getElementById('img1').addEventListener('mouseover',function (){
+      document.getElementById('info').style.display = 'block';
+  document.getElementById('info').innerHTML = '1.5j'
+})
+document.getElementById('img1').addEventListener('mouseout',function (){
+      document.getElementById('info').style.display = 'none';
+
+})
+document.getElementById('img2').addEventListener('mouseover',function (){
+      document.getElementById('info').style.display = 'block';
+  document.getElementById('info').innerHTML = '-0.5j'
+})
+document.getElementById('img2').addEventListener('mouseout',function (){
+      document.getElementById('info').style.display = 'none';
+
+})
+document.getElementById('img3').addEventListener('mouseover',function (){
+      document.getElementById('info').style.display = 'block';
+  document.getElementById('info').innerHTML = '-0.1'
+})
+document.getElementById('img3').addEventListener('mouseout',function (){
+      document.getElementById('info').style.display = 'none';
+
+})
+document.getElementById('img4').addEventListener('mouseover',function (){
+      document.getElementById('info').style.display = 'block';
+  document.getElementById('info').innerHTML = '0.3j'
+})
+document.getElementById('img4').addEventListener('mouseout',function (){
+      document.getElementById('info').style.display = 'none';
+
+})
+document.getElementById('img5').addEventListener('mouseover',function (){
+      document.getElementById('info').style.display = 'block';
+  document.getElementById('info').innerHTML = '0.5'
+})
+document.getElementById('img5').addEventListener('mouseout',function (){
+      document.getElementById('info').style.display = 'none';
+
+})
+document.getElementById('img6').addEventListener('mouseover',function (){
+      document.getElementById('info').style.display = 'block';
+  document.getElementById('info').innerHTML = '0.6'
+})
+document.getElementById('img6').addEventListener('mouseout',function (){
+      document.getElementById('info').style.display = 'none';
+
+})
+document.getElementById('img7').addEventListener('mouseover',function (){
+      document.getElementById('info').style.display = 'block';
+  document.getElementById('info').innerHTML = '0.9'
+})
+document.getElementById('img7').addEventListener('mouseout',function (){
+      document.getElementById('info').style.display = 'none';
+
+})
+document.getElementById('img8').addEventListener('mouseover',function (){
+      document.getElementById('info').style.display = 'block';
+  document.getElementById('info').innerHTML = '1.4'
+})
+document.getElementById('img8').addEventListener('mouseout',function (){
+      document.getElementById('info').style.display = 'none';
+
+})
+document.getElementById('img9').addEventListener('mouseover',function (){
+      document.getElementById('info').style.display = 'block';
+  document.getElementById('info').innerHTML = '-0.9'
+})
+document.getElementById('img9').addEventListener('mouseout',function (){
+      document.getElementById('info').style.display = 'none';
+
+})
+document.getElementById('img10').addEventListener('mouseover',function (){
+      document.getElementById('info').style.display = 'block';
+  document.getElementById('info').innerHTML = '0.3'
+})
+document.getElementById('img10').addEventListener('mouseout',function (){
+      document.getElementById('info').style.display = 'none';
+
+})

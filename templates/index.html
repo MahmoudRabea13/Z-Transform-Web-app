@@ -48,43 +48,45 @@
     <div id="cat" style="display: none;" > 
         <section class="correction">
             <div class="one">
+                <h2 id="info" style="display: none"></h2>
                 <div class="oneside">
-                    <div class="oneoneside">
+
+                    <div class="oneoneside" id="img1">
                         <img src="/static/catalog/1.5j.png" alt="1.5j" width="100%" height="113%">
                     </div>
-                    <div class="onetwoside">
+                    <div class="onetwoside" id="img2">
                         <img src="/static/catalog/-0.5j.png" alt="-0.5j" width="100%" height="113%">     
                     </div>
                 </div>
                 <div class="twoside">
-                    <div class="twooneside">
+                    <div class="twooneside" id="img3">
                         <img src="/static/catalog/-0.1.png" alt="-0.1" width="100%" height="113%">
                     </div>
-                    <div class="twotwoside">
+                    <div class="twotwoside" id="img4">
                         <img src="/static/catalog/0.3j.png" alt="0.3j" width="100%" height="113%">
                     </div>
                 </div>
                 <div class="thirdside">
-                    <div class="thirdoneside">
+                    <div class="thirdoneside"id="img5">
                         <img src="/static/catalog/0.5.png" alt="0.5" width="100%" height="113%">
                     </div>
-                    <div class="thirdtwoside">
+                    <div class="thirdtwoside" id="img6">
                         <img src="/static/catalog/0.6.png" alt="0.6" width="100%" height="113%">
                     </div>
                 </div>
                 <div class="fourside">
-                    <div class="fouroneside">
+                    <div class="fouroneside" id="img7">
                         <img src="/static/catalog/0.9.png" alt="0.9" width="100%" height="113%">
                     </div>
-                    <div class="fourtwoside">
+                    <div class="fourtwoside" id="img8">
                         <img src="/static/catalog/1.4.png" alt="1.4" width="100%" height="113%">
                     </div>
                 </div>
                 <div class="fiveside">
-                    <div class="fiveoneside">
+                    <div class="fiveoneside" id="img9">
                         <img src="/static/catalog/-0.9.png" alt="-0.9" width="100%" height="113%">
                     </div>
-                    <div class="fivetwoside">
+                    <div class="fivetwoside" id="img10">
                         <img src="/static/catalog/0.3.png" alt="0.3" width="100%" height="113%">
                     </div>
                 </div>
@@ -94,11 +96,13 @@
                 <div id="applypassplot" style="width: 100%; height: 300px;"></div>
                 <div class="form">
                     <form action="/allpass" method="POST">
-                        <label for="all-pass" style="color: rgb(0, 0, 0);">All pass Value:</label><br>
+                        <label for="all-pass" style="color: rgb(0, 0, 0); z-index: 10; position: relative; top: 20px;">All pass Value:</label><br>
                         <input type="text" id="all-pass" name="all-pass" style="background-color: aliceblue;">
                         <input  id="submit-all-pass"  type="submit"  value="add">
                         <input  id="apply-all-pass" disabled type="submit" value="apply">
+
                         <input  id="deleted-list" type="submit" value="deleted-list" style="display: none;">
+
                     </form>
                 </div>
                 
