@@ -10,7 +10,15 @@ app = Flask( __name__ )
 process = Process()
 filter = Filter()
 
-
+def convert_csv_tolist(df):
+    zeros = []
+    poles = []
+    for i in range(len(df)):
+        if complex(df['zeros'][i]) == 0 or complex(df['poles'][i]) == 0:
+            continue
+        zeros.append(complex(df['zeros'][i]))
+        poles.append(complex(df['poles'][i]))
+    return zeros,poles 
 def convert_to_complex(input):
     out = []
     for i in range(len(input)):
@@ -80,12 +88,13 @@ def importsignal():
 def importfilter():
     if request.method == 'POST': 
         value = request.files.get('imported-filter')
-        print(value.filename)
-        #importedsig = pd.read_csv('./static/imported-signals/'+value.filename)
-        # print(importedsig['x'])
-        #new_signal = process.apply_filter(importedsig['y'])
-        #response = {'x':importedsig['x'].tolist(),'y':importedsig['y'].tolist(),'y_new':new_signal.tolist()}
-        return 'yessss'
+        data = pd.read_csv(value.filename)
+        zeros,poles = convert_csv_tolist(data)
+        process.set_filter(zeros,poles,1)
+        frequency,magnitude,phase = process.get_response()
+        print("done")
+        response = {'frequency':frequency.tolist(),'phase':phase.tolist(),'magnitude':magnitude.tolist()}
+        return json.dumps(response)
     else:
         return render_template('index.html')
 @app.route("/download", methods=['GET','POST'])
@@ -94,10 +103,15 @@ def export_filter():
         down = request.json
         print(down)
         zeros,poles = process.get_zeros_poles()
-        to_json = [zeros,poles]
-        if down != None :
-            with open("filter.json", "w") as outfile:
-                    outfile.write(str(to_json))
+        if len(zeros) > len(poles):
+            for i in range(len(poles),len(zeros)):
+                poles.append(0)
+        elif len(poles) > len(zeros):
+            for i in range(len(zeros),len(poles)):
+                zeros.append(0)
+        to_csv = {'zeros':zeros,'poles':poles}
+        df = pd.DataFrame(to_csv)
+        df.to_csv('./filter.csv', index=False)
     return 'success'
 
 
