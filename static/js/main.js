@@ -139,8 +139,20 @@ realInputBtn.addEventListener("change", function(){
         const formData = new FormData();
         formData.append("imported-filter", realInputBtn.files[0] );
         xhr.open('POST', '/importfilter', true);
+        xhr.onload = function(e){
         if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log('ana geeet')
+              Plotly.newPlot('mag-plot', [{
+                x: JSON.parse(xhr.response)['frequency'],
+                y: JSON.parse(xhr.response)['magnitude'],
+                type: 'scatter',
+            }]);  
+            Plotly.newPlot('phase-plot', [{
+                x: JSON.parse(xhr.response)['frequency'],
+                y: JSON.parse(xhr.response)['phase'],
+                type: 'scatter'
+            }]);   
+        };
+
         }
             xhr.send(formData);
     }
