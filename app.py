@@ -79,7 +79,14 @@ def importsignal():
 @app.route("/download", methods=['GET','POST'])
 def export_filter():
     if request.method == 'POST':
+        down = request.json
+        print(down)
         zeros,poles = process.get_zeros_poles()
+        to_json = [zeros,poles]
+        if down != None :
+            with open("filter.json", "w") as outfile:
+                    outfile.write(str(to_json))
+    return 'success'
 
 
 
