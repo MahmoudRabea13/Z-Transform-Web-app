@@ -101,13 +101,16 @@
 #downloaded{
     display: flex;
     justify-content: center;
-    padding: 2px;
+    padding: 10px;
     color: rgb(255, 255, 255);
-    /* background-color: red; */
+    background-color: red;
+    border: 1px solid #000;
     border-radius: 100px;
     cursor: pointer;
     text-decoration: none;
     font-size: small;
+    position: relative;
+    top: 68px;
     
 }
 #downloaded:hover{
