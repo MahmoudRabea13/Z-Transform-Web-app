@@ -49,6 +49,20 @@ def filter():
         return json.dumps(response)
     else:
         return render_template('index.html')
+@app.route("/deletepolezero" ,methods=['GET','POST'])
+def deletezeropole():
+    if request.method == 'POST': 
+        zeros = request.json['zeros']
+        poles = request.json['poles']
+        zeros_out = convert_to_complex(zeros)
+        poles_out = convert_to_complex(poles)
+        process.set_filter(zeros_out, poles_out, 1)
+        frequency, magnitude,phase = process.get_response()
+        response = {'frequency':frequency.tolist(),'magnitude':magnitude.tolist(),'phase':phase.tolist()}
+        return json.dumps(response)
+    else:
+        return render_template('index.html')
+
 @app.route("/allpass" ,methods=['GET','POST'])
 def allpass():
     if request.method == 'POST': 
