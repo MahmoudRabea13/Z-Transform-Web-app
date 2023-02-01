@@ -63,8 +63,10 @@ def allpass():
 @app.route("/applyallpass" ,methods=['GET','POST'])
 def applyallpass():
     if request.method == 'POST': 
-        value = request.json
+        value = request.json['values']
+        list = request.json['list']
         print(value)
+        print(list)
         process.add_all_pass(complex(value))
         frequency, magnitude,phase = process.get_response()
         response = {'frequency':frequency.tolist(),'phase':phase.tolist(),'magnitude':magnitude.tolist()}
@@ -92,7 +94,6 @@ def importfilter():
         zeros,poles = convert_csv_tolist(data)
         process.set_filter(zeros,poles,1)
         frequency,magnitude,phase = process.get_response()
-        print("done")
         response = {'frequency':frequency.tolist(),'phase':phase.tolist(),'magnitude':magnitude.tolist()}
         return json.dumps(response)
     else:
