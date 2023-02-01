@@ -65,7 +65,9 @@ def applyallpass():
     if request.method == 'POST': 
         value = request.json['values']
         list = request.json['list']
-        print(value)
+        deletedlist= request.json['deletedlist']
+        print(deletedlist)
+        print('ahmhsa')
         print(list)
         process.add_all_pass(complex(value))
         frequency, magnitude,phase = process.get_response()
