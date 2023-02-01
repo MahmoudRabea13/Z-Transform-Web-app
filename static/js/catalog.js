@@ -37,10 +37,10 @@ document.getElementById('apply-all-pass').addEventListener('click', function(e){
     e.preventDefault();
     document.getElementById('apply-all-pass').disabled = true;
     var xhr = new XMLHttpRequest();
-
+    deletedlist =document.getElementById('list').innerText;
     list =document.getElementById('list').innerText
     values =document.getElementById('all-pass').value
-    var JSON_sent = {values,list};
+    var JSON_sent = {values,list,deletedlist};
     xhr.open('POST', '/applyallpass', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload = function (e) {
@@ -71,7 +71,42 @@ document.getElementById('apply-all-pass').addEventListener('click', function(e){
 });
 
 document.getElementById('list').addEventListener('click',function(e){
+    list =document.getElementById('list').innerText;
     this.removeChild(e.target);
+    var xhr = new XMLHttpRequest();
+    deletedlist =document.getElementById('list').innerText;
+    document.getElementById('deleted-list').addEventListener('click',function(e){
+        e.preventDefault();
+        document.getElementById('deleted-list').click();
+    })
     console.log('deleted')
+    var JSON_sent = {values,list,deletedlist};
+    xhr.open('POST', '/applyallpass', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function (e) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log('success')
+/*              Plotly.newPlot('applypassplot', [{
+                x:JSON.parse(xhr.response)['frequency'] ,
+                y:JSON.parse(xhr.response)['phase']  ,
+                type: 'scatter',
+            }]);
+            Plotly.newPlot('mag-plot', [{
+            width: 300,
+            height: 300,
+            x: JSON.parse(xhr.response)['frequency'],
+            y: JSON.parse(xhr.response)['magnitude'],
+            type: 'scatter',
+            }]); 
+            Plotly.newPlot('phase-plot', [{
+            width: 300,
+            height: 300,
+            x: JSON.parse(xhr.response)['frequency'],
+            y: JSON.parse(xhr.response)['phase'],
+            type: 'scatter'
+            }]);  */
+        }};  
+    xhr.send(JSON.stringify(JSON_sent));
+    console.log('sent successfully')
 })
 
