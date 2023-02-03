@@ -14,10 +14,15 @@ def convert_csv_tolist(df):
     zeros = []
     poles = []
     for i in range(len(df)):
-        if complex(df['zeros'][i]) == 0 or complex(df['poles'][i]) == 0:
+        if complex(df['zeros'][i]) == 0 :
+            poles.append(complex(df['poles'][i]))
             continue
-        zeros.append(complex(df['zeros'][i]))
-        poles.append(complex(df['poles'][i]))
+        elif complex(df['poles'][i]) == 0 :
+            zeros.append(complex(df['zeros'][i]))
+            continue
+        else:
+            poles.append(complex(df['poles'][i]))
+            zeros.append(complex(df['zeros'][i]))
     return zeros,poles 
 def convert_to_complex(input):
     out = []
