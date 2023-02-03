@@ -23,12 +23,14 @@ def convert_csv_tolist(df):
         else:
             poles.append(complex(df['poles'][i]))
             zeros.append(complex(df['zeros'][i]))
-    return zeros,poles 
+    return zeros,poles
+
 def convert_to_complex(input):
     out = []
     for i in range(len(input)):
         out.append(input[i].get('x')+input[i].get('y')*1j)
     return out
+
 @app.route("/" ,methods=['POST','GET'])
 def image():
     if request.method == 'POST':
@@ -38,8 +40,6 @@ def image():
         return json.dumps(value.tolist())
     else:
         return render_template('index.html')
-
-
         
 @app.route("/filter" ,methods=['GET','POST'])
 def filter():
