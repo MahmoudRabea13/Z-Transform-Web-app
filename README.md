@@ -21,7 +21,7 @@ ability to delete any given pole or zero or even adjust its location
 
 
 ### 2. Import&Export Filters:
-Export any filter in csv format and apply concepts of Z-transform. 
+Export any filter in CSV format and apply concepts of Z-transform. 
 ![Preview Gif](/snaps/import.gif)
 
 also you can Export the any filter you constuct in the app.
